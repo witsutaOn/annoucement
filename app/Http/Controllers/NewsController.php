@@ -5,24 +5,22 @@ namespace App\Http\Controllers;
 use App\News;
 use App\News_type;
 use App\Organize;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class NewsController extends Controller
 {
     public function index(){
         $news = News::all();
-        return view('news.index')->with('news', $news);
-//        $news_type = DB::table('news_type')->get();
-//        $group_user = DB::table('group_user')->get();
-//        $organize = DB::table('organize')->get();
-////        dd($news_type);
-//        return view('news.upload',compact('news_type'));
+        return view('news.create')->with('news', $news);
+//
     }
     public function create(){
         $news_type = News_type::all();
-        $organize = Organize::all();
-//        dd($news_type,$organize);
-        return view('cms.create-new-user')->with('news_type', $news_type)->with('organize',$organize);
+////        dd($news_type,$organize);
+        return view('news.create')->with('news_type', $news_type);
 //            ->with('organize',$organize);
 //        $news = News::create(request['title','content','type']);
 //        return News::create([
@@ -40,7 +38,7 @@ class NewsController extends Controller
     }
     public function store(Request $request){
         $attributes =  request()->validate([
-            'type_id' => ['required','integer'],
+            'type_' => ['required','string'],
             'organize_id' =>['required','integer'],
 //            'user_id'=> ['required','integer'],
 //            'images' => ['required','text'],
@@ -72,5 +70,21 @@ class NewsController extends Controller
     {
         $news = News::findOrFail($id);
         return view('news.edit')->with('news', $news);
+    }
+
+    public function createNewsType()
+    {
+        return view('news.create-new-type');
+
+    }
+    public function storeNewsType(Request $request){
+        $attributes =  request()->validate([
+            'type' => ['required','string'],
+        ]);
+
+
+
+        News_type::create($attributes);
+        return view('news.create-new-type');
     }
 }

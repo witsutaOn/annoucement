@@ -8,5 +8,5 @@ class Organize extends Model
 {
     //
     protected $table = 'organize';
-    protected $fillable = ['name','group_id','district','province','post_code'];
+    protected $fillable = ['name','group_id','district','province','postcode'];
 }

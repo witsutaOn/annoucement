@@ -83,9 +83,9 @@
                                 <select class="custom-select "  name="group_id" required>
                                     <option value="11">test</option>
                                     <option value="22">test2</option>
-{{--                                    @foreach($group_user as $row)--}}
-{{--                                        <option value="{{$row->id}}">{{$row->group_name}}</option>--}}
-{{--                                     @endforeach--}}
+                                    @foreach($group_user as $row)
+                                        <option value="{{$row->id}}">{{$row->group_name}}</option>
+                                     @endforeach
                                 </select>
                             </div>
                         </div>

@@ -13,7 +13,7 @@
     <script src="{{ asset('js/app.js') }}" async></script>
 
     <!-- Include script Drop Zone -->
-    <script  src="{{ asset('js/dropzone.js') }}" ></script>
+    <script  src="{{ asset('js/dropzone.js') }}" async></script>
 
     <!-- Include styles Drop Zone -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/dropzone.css') }}">

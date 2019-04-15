@@ -20,9 +20,9 @@ Route::get('/', function () {
 //});
 
 
-Route::get('/blank', function () {
-    return view('cms.blank');
-});
+Route::get('/dashboard', function () {
+    return view('cms.index');
+})->name('dashboard');
 //Route::post('login', 'UserController@login');
 //Route::post('register', 'UserController@register');
 //Route::group(['middleware' => 'auth:api'], function(){
@@ -64,3 +64,9 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::resource('users', 'UserController');
+
+Route::resource('organize', 'OrganizeController');
+
+Route::get('/create/news/type', 'NewsController@createNewsType')->name('createNewsType');
+
+Route::post('/create/news/type', 'NewsController@storeNewsType');

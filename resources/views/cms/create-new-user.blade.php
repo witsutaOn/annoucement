@@ -1,16 +1,16 @@
 @extends('layouts.layout-cms')
 
 @section('content')
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Add New User') }}</div>
-
+                    @method('PUT')
                     <div class="card-body">
                         <form method="POST" action="{{ action('UserController@store') }}">
                             @csrf
-
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -61,11 +61,13 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group row">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Organize') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select " name="organize_id" required>
+
                                         {{--{                                    <option selected hidden>Organize</option>--}}
                                         @foreach($organize as $og)
                                             <option value="{{$og->id}}" >{{$og->name}}</option>
@@ -75,17 +77,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Group ID') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Group User') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select "  name="group_id" required>
                                         <!-- TODO: edit for every group user-->
 
-                                            <option value="11">test</option>
-                                            <option value="22">test2</option>
-                                            {{--                                    @foreach($group_user as $row)--}}
-                                            {{--                                        <option value="{{$row->id}}">{{$row->group_name}}</option>--}}
-                                            {{--                                     @endforeach--}}
+{{--                                            <option value="11">test</option>--}}
+{{--                                            <option value="22">test2</option>--}}
+                                        @foreach($group_user as $group)
+                                            <option value="{{$group->id}}" >{{$group->group_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

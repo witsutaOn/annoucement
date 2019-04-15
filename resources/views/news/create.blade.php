@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.layout-cms')
 
 @section('content')
 <div class="container">
@@ -38,5 +38,6 @@
         </div>
     </form>
 </div>
+<!-- Demo scripts for this page-->
 
 @endsection

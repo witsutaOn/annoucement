@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Group_user;
 use App\News;
-use Illuminate\Support\Facades\DB;
+use App\News_type;
+use App\Organize;
 use Illuminate\Support\Facades\Hash;
 use \Illuminate\Support\Facades\Validator;
-//use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,8 +28,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $group_user = DB::table('group_user')->where('id', '>', 1)->get();
-        $organize = DB::table('organize')->get();
+        $news_type = News_type::all();
+        $organize = Organize::all();
+        $group_user = Group_user::all()->where('id','>',1);
+//        return view('cms.create-new-user');
        return view('cms.create-new-user', ['organize' => $organize,'group_user' => $group_user]);
     }
     public function login(){
@@ -79,24 +82,32 @@ class UserController extends Controller
         return response()->json(['success' => $user], $this-> successStatus);
     }
 
-    public function create(array $data)
+    public function create()
     {
-         Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'group_id' => ['required', 'integer' ],
-            'organize_id' => ['required', 'integer'],
-        ]);
-
-         User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'group_id' => $data['group_id'],
-            'organize_id' => $data['organize_id'],
-        ]);
-         return redirect();
+        $news_type = News_type::all();
+        $organize = Organize::all();
+        $group_user = Group_user::all()->where('id','>',1);
+//        dd($news_type,$organize);
+        return view('cms.create-new-user')->with('news_type', $news_type)->with('organize',$organize)->with('group_user',$group_user);
+//            ->with('organize',$organize);
+//        $news_type = News_type::all();
+//        $organize = Organize::all();
+//         Validator::make($data, [
+//            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'password' => ['required', 'string', 'min:8', 'confirmed'],
+//            'group_id' => ['required', 'integer' ],
+//            'organize_id' => ['required', 'integer'],
+//        ]);
+//
+//         User::create([
+//            'name' => $data['name'],
+//            'email' => $data['email'],
+//            'password' => Hash::make($data['password']),
+//            'group_id' => $data['group_id'],
+//            'organize_id' => $data['organize_id'],
+//        ]);
+//         return redirect();
     }
 
     public function store(Request $request)
@@ -108,8 +119,14 @@ class UserController extends Controller
             'group_id' => ['required', 'integer' ],
             'organize_id' => ['required', 'integer'],
         ]);
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'group_id' => $data['group_id'],
+            'organize_id' => $data['organize_id'],
+        ]);
 
-        User::create($data);
         return redirect()->action('UserController@index');
     }
 }

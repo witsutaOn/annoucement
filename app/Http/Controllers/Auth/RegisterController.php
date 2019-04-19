@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Group_user;
+use App\Organize;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -34,13 +35,20 @@ class RegisterController extends Controller
 
     public function showRegister()
     {
+//        if(route('register')){
+            $group_user= Group_user::where('id', '=', 1)->get();
+//            $group_user = DB::table('group_user')->where('id', '=', 1)->get();
+            return view('auth.registerSuperAdmin')->with('group_user',$group_user);
+//        }
+//        else{
+//            $group_user= Group_user::where('id', '>', 1)->get();
+//            $organize = Organize::all();
+////
+////            $group_user = DB::table('group_user')->where('id', '>=', 2)->get();
+////            $organize = DB::table('organize')->get();
+//            return view('auth.register', ['organize' => $organize,'group_user' => $group_user]);
+//        }
 
-//        $group_user= App\Group_user::where('id', '>', 1)->get();
-//        $organize = Organize::all();
-
-        $group_user = DB::table('group_user')->where('id', '>', 1)->get();
-        $organize = DB::table('organize')->get();
-        return view('auth.register', ['organize' => $organize,'group_user' => $group_user]);
 //        return view('auth.register',compact('organize'));
 //        return view('auth.register')->with('group_user',$group_user,'organize',$organize);
     }

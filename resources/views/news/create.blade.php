@@ -6,7 +6,6 @@
 
     <form method="POST" action="{{ action('NewsController@store') }}">
 
-        {{--        { action('PostsController@update', ['id'=> $post->id ]) }}--}}
         @csrf
 
         <div class="form-group">
@@ -18,7 +17,7 @@
 
         <div class="form-group">
             <label  for="inputNewsType">ประเภทข่าว</label>
-            <select class="custom-select " id="inlineFormCustomSelectPref">
+            <select class="custom-select " id="inlineFormCustomSelectPref" name="type_id">
                 <option selected hidden>ประเภทข่าว</option>
                 @foreach($news_type as $row)
                     <option value="{{$row->id}}">{{$row->type}}</option>
@@ -26,9 +25,22 @@
             </select>
 
         </div>
+        <div class="row form-group ">
+            <div class="form-group col-sm-6">
+                <label  for="inputNewsType">Publish Status</label>
+                <select class="custom-select " id="inlineFormCustomSelectPref2" name="publish_status">
+                        <option value="0">Not Publish</option>
+                        <option value="1">Publish</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="example-date-input" >Date</label>
+                <input class="form-control" type="date" id="example-date-input" name="publish_at">
+            </div>
+        </div>
         <div class="form-group">
             <label for="inputNewsContent">เนื้อหาข่าว</label>
-            <textarea></textarea>
+            <textarea rows="4" name="content"></textarea>
 
         </div>
 

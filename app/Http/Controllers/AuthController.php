@@ -23,15 +23,15 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed',
-            'organize_id' => 'required|integer',
+            'password' => 'required|string|confirmed|min:8',
+//            'organize_id' => 'required|integer',
             'group_id' => 'required|integer',
         ]);
         $user = new User([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'organize_id' => $request->organize_id,
+//            'organize_id' => $request->organize_id,
             'group_id' => $request->group_id,
         ]);
         $user->save();

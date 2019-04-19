@@ -33,8 +33,8 @@ Route::get('/register', 'RegisterController@show')->name('showRegistry');
 Route::group([
     'prefix' => 'auth'
 ], function () {
-    Route::post('/login', 'AuthController@login')->name('loginTest');
-    Route::post('/dashboard', 'AuthController@signUp')->name('signUp');
+    Route::post('/dashboard', 'AuthController@login')->name('loginTest');
+    Route::post('/signUp', 'AuthController@signUp')->name('signUp');
 
     Route::group([
         'middleware' => 'auth:api'
@@ -64,6 +64,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 
 Route::resource('users', 'UserController');
+
 
 Route::resource('organize', 'OrganizeController');
 

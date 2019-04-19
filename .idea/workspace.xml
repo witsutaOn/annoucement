@@ -54,8 +54,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/cms/create-new-user.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1265">
-              <caret line="11" column="80" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
+            <state relative-caret-position="187">
+              <caret line="11" column="90" selection-start-line="11" selection-start-column="90" selection-end-line="11" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -98,8 +98,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/layouts/layout-cms.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="149" column="30" lean-forward="true" selection-start-line="125" selection-start-column="18" selection-end-line="149" selection-end-column="30" />
+            <state relative-caret-position="126">
+              <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -180,8 +180,8 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" />
         <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/cms/create-new-user.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/cms/create-new-user.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/layout-cms.blade.php" />
       </list>
     </option>
@@ -292,8 +292,8 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-42" />
-    <option name="y" value="122" />
+    <option name="x" value="-43" />
+    <option name="y" value="121" />
     <option name="width" value="1850" />
     <option name="height" value="830" />
   </component>
@@ -406,12 +406,12 @@
       <workItem from="1554692503398" duration="27589000" />
       <workItem from="1554731014711" duration="16007000" />
       <workItem from="1554904230756" duration="9644000" />
-      <workItem from="1555352664837" duration="793000" />
+      <workItem from="1555352664837" duration="1194000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68033000" />
+    <option name="totallyTimeSpent" value="68434000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -423,8 +423,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -774,15 +773,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/cms/create-new-user.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1265">
-          <caret line="11" column="80" selection-start-line="11" selection-start-column="80" selection-end-line="11" selection-end-column="80" />
+        <state relative-caret-position="187">
+          <caret line="11" column="90" selection-start-line="11" selection-start-column="90" selection-end-line="11" selection-end-column="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/layout-cms.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="149" column="30" lean-forward="true" selection-start-line="125" selection-start-column="18" selection-end-line="149" selection-end-column="30" />
+        <state relative-caret-position="126">
+          <caret line="125" column="48" selection-start-line="125" selection-start-column="48" selection-end-line="125" selection-end-column="48" />
         </state>
       </provider>
     </entry>

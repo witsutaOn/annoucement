@@ -36,21 +36,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Group User') }}</label>
 
-                                <div class="col-md-6">
-                                    <select class="custom-select "  name="group_id" required>
-                                        <!-- TODO: edit for every group user-->
-
-                                        {{--                                            <option value="11">test</option>--}}
-                                        {{--                                            <option value="22">test2</option>--}}
-                                        @foreach($group_user as $group)
-                                            <option value="{{$group->id}}" >{{$group->group_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
@@ -72,6 +58,21 @@
 
                                     <span class="invalid-feedback" role="alert"></span>
 
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Group User') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="custom-select "  name="group_id" required>
+                                        <!-- TODO: edit for every group user-->
+
+                                        {{--                                            <option value="11">test</option>--}}
+                                        {{--                                            <option value="22">test2</option>--}}
+                                        @foreach($group_user as $group)
+                                            <option value="{{$group->id}}" >{{$group->group_name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

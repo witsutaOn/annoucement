@@ -30,7 +30,8 @@ class UserController extends Controller
     {
         $news_type = News_type::all();
         $organize = Organize::all();
-        $group_user = Group_user::all()->where('id','>',1);
+        $group_user = Group_user::all();
+//            ->where('id','>',1);
 //        return view('cms.create-new-user');
        return view('cms.create-new-user', ['organize' => $organize,'group_user' => $group_user]);
     }
@@ -86,28 +87,10 @@ class UserController extends Controller
     {
         $news_type = News_type::all();
         $organize = Organize::all();
-        $group_user = Group_user::all()->where('id','>',1);
-//        dd($news_type,$organize);
-        return view('cms.create-new-user')->with('news_type', $news_type)->with('organize',$organize)->with('group_user',$group_user);
-//            ->with('organize',$organize);
-//        $news_type = News_type::all();
-//        $organize = Organize::all();
-//         Validator::make($data, [
-//            'name' => ['required', 'string', 'max:255'],
-//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-//            'password' => ['required', 'string', 'min:8', 'confirmed'],
-//            'group_id' => ['required', 'integer' ],
-//            'organize_id' => ['required', 'integer'],
-//        ]);
+        $group_user = Group_user::where('id','>',1)->get();
 //
-//         User::create([
-//            'name' => $data['name'],
-//            'email' => $data['email'],
-//            'password' => Hash::make($data['password']),
-//            'group_id' => $data['group_id'],
-//            'organize_id' => $data['organize_id'],
-//        ]);
-//         return redirect();
+        return view('cms.create-new-user')->with('news_type', $news_type)->with('organize',$organize)->with('group_user',$group_user);
+//
     }
 
     public function store(Request $request)

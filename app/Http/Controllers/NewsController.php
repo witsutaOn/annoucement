@@ -38,18 +38,19 @@ class NewsController extends Controller
     }
     public function store(Request $request){
         $attributes =  request()->validate([
-            'type_' => ['required','string'],
+            'type_id' => ['required','string'],
             'organize_id' =>['required','integer'],
-//            'user_id'=> ['required','integer'],
+            'user_id'=> ['required','integer'],
 //            'images' => ['required','text'],
             'title' => ['required','string'],
-            'content' => ['required','string'],
-            'published_at' => ['required','timestamp'],
-            'publish_status' => ['required','integer']
+//            'content' => ['required','string'],
+//            'published_at' => ['required','timestamp'],
+//            'publish_status' => ['required','integer']
         ]);
-
-        $news = News::create($attributes);
-        return redirect()->action('NewsController@show', ['id' => $news->id]);
+    dd($attributes);
+        News::create($attributes);
+//        return redirect()->action('NewsController@show', ['id' => $news->id]);
+        return redirect();
 
 //        $files = $request->file('file');
 //        foreach ($files as $file){

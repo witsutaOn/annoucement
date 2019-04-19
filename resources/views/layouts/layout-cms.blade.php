@@ -106,24 +106,35 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-fw fa-folder"></i>
-                        <span>Pages</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                        <h6 class="dropdown-header">Login Screens:</h6>
-                        <a class="dropdown-item" href="login.blade.php">Login</a>
-                        <a class="dropdown-item" href="register.blade.php">Register</a>
-                        <a class="dropdown-item" href="forgot-password.blade.php">Forgot Password</a>
-                        <div class="dropdown-divider"></div>
-                        <h6 class="dropdown-header">Other Pages:</h6>
-                        <a class="dropdown-item" href="404.blade.php">404 Page</a>
-                        <a class="dropdown-item" href="blank.blade.php">Blank Page</a>
-                    </div>
-                </li>
-                @if( Auth::user()->group_id == 1)
+{{--                <li class="nav-item dropdown">--}}
+{{--                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"--}}
+{{--                       aria-haspopup="true" aria-expanded="false">--}}
+{{--                        <i class="fas fa-fw fa-folder"></i>--}}
+{{--                        <span>Pages</span>--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">--}}
+{{--                        <h6 class="dropdown-header">Login Screens:</h6>--}}
+{{--                        <a class="dropdown-item" href="login.blade.php">Login</a>--}}
+{{--                        <a class="dropdown-item" href="register.blade.php">Register</a>--}}
+{{--                        <a class="dropdown-item" href="forgot-password.blade.php">Forgot Password</a>--}}
+{{--                        <div class="dropdown-divider"></div>--}}
+{{--                        <h6 class="dropdown-header">Other Pages:</h6>--}}
+{{--                        <a class="dropdown-item" href="404.blade.php">404 Page</a>--}}
+{{--                        <a class="dropdown-item" href="blank.blade.php">Blank Page</a>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
+                @if (Auth::guest() && !route('register'))
+                    <script>
+                        window.location = "/login";
+                        alert("Please login");
+                    </script>
+
+                @elseif( Auth::user()->group_id == 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Add Organize</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('UserController@create') }}">
                             <i class="fas fa-fw fa-chart-area"></i>
@@ -139,15 +150,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
                                 <i class="fas fa-fw fa-chart-area"></i>
-                                <span>Add New Organize</span></a>
+                                <span>Add Organize</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ action('UserController@create') }}">
+                                <i class="fas fa-fw fa-chart-area"></i>
+                                <span>Add User</span></a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ action('NewsController@create') }}">
+                                <i class="fas fa-fw fa-chart-area"></i>
+                                <span>Add News</span></a>
                         </li>
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('NewsController@create') }}">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add News </span></a>
-                    </li>
-                @endif
+               @endif
 
             </ul>
 
@@ -177,9 +194,9 @@
 
 
 
-    {{--    <main class="py-4">--}}
-    {{--        @yield('content')--}}
-    {{--    </main>--}}
+{{--    <main class="py-4">--}}
+{{--        @yield('content')--}}
+{{--    </main>--}}
 </div>
 
 <!-- Include external JS libs. -->

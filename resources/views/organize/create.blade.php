@@ -1,7 +1,7 @@
 @extends('layouts.layout-cms')
 
 @section('content')
-
+<?php //dd( Auth::user()->group_id);?>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -22,6 +22,17 @@
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="address" type="text" class="form-control" name="address"  required autofocus>
+
+                                    <span class="invalid-feedback" role="alert"></span>
+
                                 </div>
                             </div>
 

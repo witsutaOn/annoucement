@@ -17,6 +17,7 @@ class CreateOrganizeTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->bigInteger('group_id');
+            $table->string('address');
             $table->string('district');
             $table->string('province');
             $table->char('postcode');

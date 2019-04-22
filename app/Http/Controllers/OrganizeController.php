@@ -18,8 +18,9 @@ class OrganizeController extends Controller
     public function index()
     {
         //
+        $user = User::all();
         $group_user = Group_user::all()->where('id','>',1);
-        return view('organize.create')->with('group_user',$group_user);
+        return view('organize.create')->with('group_user',$group_user)->with('user',$user);
     }
 
     /**
@@ -48,6 +49,7 @@ class OrganizeController extends Controller
         $attributes = request()->validate([
             'name' => ['required', 'string', 'max:255'],
             'group_id' => ['required', 'integer'],
+            'address' => ['required', 'string'],
             'district' => ['required', 'string'],
             'province' => ['required', 'string' ],
             'postcode' => ['required' ],

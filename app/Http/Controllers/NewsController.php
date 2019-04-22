@@ -6,6 +6,7 @@ use App\News;
 use App\News_type;
 use App\Organize;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,8 @@ class NewsController extends Controller
 {
     public function index(){
         $news = News::all();
-        return view('news.create')->with('news', $news);
+        $news_type = News_type::all();
+        return view('news.create')->with('news', $news)->with('news_type',$news_type);
 //
     }
     public function create(){
@@ -37,20 +39,30 @@ class NewsController extends Controller
 
     }
     public function store(Request $request){
-        $attributes =  request()->validate([
-            'type_id' => ['required','string'],
-            'organize_id' =>['required','integer'],
-            'user_id'=> ['required','integer'],
-//            'images' => ['required','text'],
+        request()->validate([
+            'type_id' => ['required'],
             'title' => ['required','string'],
-//            'content' => ['required','string'],
-//            'published_at' => ['required','timestamp'],
-//            'publish_status' => ['required','integer']
+            'content' => ['required','string'],
+            'publish_status' => ['required','integer'],
         ]);
-    dd($attributes);
-        News::create($attributes);
+        News::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'type_id' => $request->input('type_id'),
+
+            'organize_id' => Auth::user()->group_id ,
+//
+            'user_id' =>  Auth::user()->id ,
+            'images' => "images",
+//            'publish_at' => $request->publish_at,
+//            'publish_at' => "22",
+            'publish_status' => $request->input('publish_status'),
+//            'publish_status' => 0,
+            'view_count' => 15,
+        ]);
+        $news_type = News_type::all();
 //        return redirect()->action('NewsController@show', ['id' => $news->id]);
-        return redirect();
+        return view('news.create')->with('news_type',$news_type);
 
 //        $files = $request->file('file');
 //        foreach ($files as $file){

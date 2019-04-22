@@ -44,6 +44,8 @@
 </head>
 <body>
 <div id="app">
+
+<!--    --><?php //dd( Auth::user()->group_id);?>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top navbar-laravel">
         <div class="container-fluid">
             <a class="navbar-brand mr-1" href="{{ url('/') }}">
@@ -128,8 +130,7 @@
                         window.location = "/login";
                         alert("Please login");
                     </script>
-
-                @elseif( Auth::user()->group_id == 1)
+                @elseif(Auth::user()->group_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
                             <i class="fas fa-fw fa-chart-area"></i>

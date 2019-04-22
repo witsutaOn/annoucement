@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -21,20 +22,23 @@ class AuthController extends Controller
     public function signUp(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed|min:8',
 //            'organize_id' => 'required|integer',
             'group_id' => 'required|integer',
         ]);
         $user = new User([
-            'name' => $request->name,
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
 //            'organize_id' => $request->organize_id,
             'group_id' => $request->group_id,
         ]);
         $user->save();
+
         return view('auth.login');
     }
 
@@ -55,6 +59,7 @@ class AuthController extends Controller
             'password' => 'required|string',
             'remember_me' => 'boolean'
         ]);
+
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials))
             return response()->json([
@@ -73,7 +78,11 @@ class AuthController extends Controller
                 $tokenResult->token->expires_at
             )->toDateTimeString()
         ]);
-        return view('cms.index')->with('tokenData',$tokenData);
+
+        $organize_id = Auth::user()->organize_id;
+        $news = News::all()->where('organize_id','==',$organize_id);
+        return redirect()->action('UserController@dashboard');
+//            view('cms.index')->with('tokenData',$tokenData)->with('news',$news)->with('user',$user);
 //        return view('cms.index')->with('tokenData',$tokenData);
     }
 

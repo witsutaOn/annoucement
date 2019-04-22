@@ -19,10 +19,9 @@ Route::get('/', function () {
 //    return view('cms.index');
 //});
 
+//
 
-Route::get('/dashboard', function () {
-    return view('cms.index');
-})->name('dashboard');
+Route::get('/dashboard', 'UserController@dashboard')->name('dashboard');
 //Route::post('login', 'UserController@login');
 //Route::post('register', 'UserController@register');
 //Route::group(['middleware' => 'auth:api'], function(){
@@ -54,7 +53,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegister')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
+Route::post('register', 'Auth\RegisterController@create');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
@@ -71,3 +70,6 @@ Route::resource('organize', 'OrganizeController');
 Route::get('/create/news/type', 'NewsController@createNewsType')->name('createNewsType');
 
 Route::post('/create/news/type', 'NewsController@storeNewsType');
+
+
+

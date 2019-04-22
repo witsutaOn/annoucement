@@ -32,6 +32,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
     <!-- Include external CSS. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -77,7 +78,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->firstname }} {{Auth::user()->lastname }}<span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -108,23 +109,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"--}}
-{{--                       aria-haspopup="true" aria-expanded="false">--}}
-{{--                        <i class="fas fa-fw fa-folder"></i>--}}
-{{--                        <span>Pages</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">--}}
-{{--                        <h6 class="dropdown-header">Login Screens:</h6>--}}
-{{--                        <a class="dropdown-item" href="login.blade.php">Login</a>--}}
-{{--                        <a class="dropdown-item" href="register.blade.php">Register</a>--}}
-{{--                        <a class="dropdown-item" href="forgot-password.blade.php">Forgot Password</a>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <h6 class="dropdown-header">Other Pages:</h6>--}}
-{{--                        <a class="dropdown-item" href="404.blade.php">404 Page</a>--}}
-{{--                        <a class="dropdown-item" href="blank.blade.php">Blank Page</a>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
+
                 @if (Auth::guest() && !route('register'))
                     <script>
                         window.location = "/login";
@@ -134,37 +119,41 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
                             <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add Organize</span></a>
+                            <span style="text-align: center">Add Digital Group or Organize</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('UserController@create') }}">
                             <i class="fas fa-fw fa-chart-area"></i>
                             <span>Add User</span></a>
                     </li>
+                @elseif(Auth::user()->group_id == 2)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('createNewsType') }}">
+                        <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
                             <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add News Type</span></a>
+                            <span style="text-align: center">Add Organize</span></a>
                     </li>
-                @else
-                    @if( Auth::user()->group_id == 2)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
-                                <i class="fas fa-fw fa-chart-area"></i>
-                                <span>Add Organize</span></a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('UserController@create') }}">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Add User</span></a>
+                    </li>
+                @elseif( Auth::user()->group_id == 3)
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ action('UserController@create') }}">
                                 <i class="fas fa-fw fa-chart-area"></i>
                                 <span>Add User</span></a>
                         </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('NewsController@create') }}">
-                                <i class="fas fa-fw fa-chart-area"></i>
-                                <span>Add News</span></a>
-                        </li>
-                    @endif
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('createNewsType') }}">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Add News Type</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('NewsController@create') }}">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Add News</span></a>
+                    </li>
                @endif
 
             </ul>
@@ -208,8 +197,10 @@
 <!-- Include Editor JS files. -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
 
+
 <!-- Initialize the editor. -->
 <script> $(function() { $('textarea').froalaEditor() }); </script>
+<script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
 
 </body>
 </html>

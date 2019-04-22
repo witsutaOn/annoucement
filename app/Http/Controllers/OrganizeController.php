@@ -45,9 +45,15 @@ class OrganizeController extends Controller
      */
     public function store(Request $request)
     {
-        //    protected $fillable = ['name','group_id','district','province','post_code'];
+
+
+        //
         $attributes = request()->validate([
             'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required','string'] ,
+            'fax' => ['required','string'] ,
+            'email' => ['required','string','email'] ,
+            'office_hours' => ['required','string'] ,
             'group_id' => ['required', 'integer'],
             'address' => ['required', 'string'],
             'district' => ['required', 'string'],

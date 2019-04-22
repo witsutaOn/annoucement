@@ -22,12 +22,11 @@ class CreateNewsTable extends Migration
 
             $table->string('title');
             $table->string('content');
-            $table->timestamp('published_at')->nullable();
+            $table->dateTime('published_at')->nullable();
             $table->integer('publish_status')->default(0);
             $table->unsignedInteger('view_count');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 

@@ -8,11 +8,11 @@ use App\News_type;
 use App\Organize;
 use Illuminate\Support\Facades\Hash;
 use \Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -28,12 +28,22 @@ class UserController extends Controller
 
     public function index()
     {
-        $news_type = News_type::all();
+
         $organize = Organize::all();
         $group_user = Group_user::all();
 //            ->where('id','>',1);
-//        return view('cms.create-new-user');
+
        return view('cms.create-new-user', ['organize' => $organize,'group_user' => $group_user]);
+    }
+
+    public function dashboard()
+    {
+        $organize_id = Auth::user()->organize_id;
+        $news = News::all()->where('organize_id','==',$organize_id);
+
+//            ->where('id','>',1);
+//        return view('cms.create-new-user');
+        return view('cms.index', ['news' => $news]);
     }
     public function login(){
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
@@ -53,7 +63,8 @@ class UserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'email' => 'required|email',
             'password' => 'required',
             'c_password' => 'required|same:password',
@@ -96,14 +107,16 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = request()->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'group_id' => ['required', 'integer' ],
             'organize_id' => ['required', 'integer'],
         ]);
         User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'group_id' => $data['group_id'],
@@ -112,4 +125,6 @@ class UserController extends Controller
 
         return redirect()->action('UserController@index');
     }
+
+
 }

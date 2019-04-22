@@ -36,21 +36,13 @@ class RegisterController extends Controller
     public function showRegister()
     {
 //        if(route('register')){
-            $group_user= Group_user::where('id', '=', 1)->get();
+//            $user = User::all();
+            $group_user= Group_user::where('id', '>', 1)->get();
 //            $group_user = DB::table('group_user')->where('id', '=', 1)->get();
             return view('auth.registerSuperAdmin')->with('group_user',$group_user);
 //        }
 //        else{
-//            $group_user= Group_user::where('id', '>', 1)->get();
-//            $organize = Organize::all();
-////
-////            $group_user = DB::table('group_user')->where('id', '>=', 2)->get();
-////            $organize = DB::table('organize')->get();
-//            return view('auth.register', ['organize' => $organize,'group_user' => $group_user]);
-//        }
-
-//        return view('auth.register',compact('organize'));
-//        return view('auth.register')->with('group_user',$group_user,'organize',$organize);
+//
     }
     /**
      * Create a new controller instance.
@@ -72,6 +64,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'group_id' => ['required', 'integer' ],
@@ -87,12 +81,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'group_id' => $data['group_id'],
-            'organize_id' => $data['organize_id'],
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'firstname' => ['required', 'string', 'max:255'],
+            'lastname' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'group_id' => ['required', 'integer' ],
+            'organize_id' => ['required', 'integer'],
         ]);
+
     }
 }

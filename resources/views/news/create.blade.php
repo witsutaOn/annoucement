@@ -33,13 +33,27 @@
                         <option value="1">Publish</option>
                 </select>
             </div>
+{{--            <div class=" col-sm-6">--}}
+{{--                <label for="example-date-input" >Date</label>--}}
+{{--                <input class="form-control" type="date" id="example-date-input" name="publish_at">--}}
+{{--            </div>--}}
+{{--            <div class="well form-group">--}}
+{{--                <div id="datetimepicker1" class="input-append date">--}}
+{{--                    <input data-format="dd/MM/yyyy hh:mm:ss" type="text" name="published_at">--}}
+{{--                    <span class="add-on">--}}
+{{--                        <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class=" col-sm-6">
                 <label for="example-date-input" >Date</label>
-                <input class="form-control" type="date" id="example-date-input" name="publish_at">
+                <input class="form-control" id="published_at" value="2019-01-01T00:00"
+                       type="datetime-local" name="published_at">
             </div>
+
         </div>
         <div class="form-group">
-{{--            <label for="inputNewsContent">เนื้อหาข่าว</label>--}}
+            <label for="inputNewsContent">เนื้อหาข่าว</label>
 {{--            <textarea rows="4" name="content"></textarea>--}}
             <input class="form-control" type="text"  id="content" name="content">
         </div>
@@ -56,5 +70,7 @@
     </form>
 </div>
 <!-- Demo scripts for this page-->
+
+
 
 @endsection

@@ -6,6 +6,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- Material Design Bootstrap -->
+{{--    <link href="{{asset('css/cms/mdb.min.css')}}" rel="stylesheet">--}}
+
     <!-- Custom fonts for this template-->
     <link href="{{asset('cmsVendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -13,25 +17,26 @@
     <link href=" {{asset('cmsVendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="/css/cms/sb-admin.css" rel="stylesheet">
+    <link href="{{asset('css/cms/sb-admin.css')}}" rel="stylesheet">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" async></script>
+{{--    <script src="{{ asset('js/app.js') }}" async></script>--}}
 
     <!-- Include script Drop Zone -->
-    <script  src="{{ asset('js/dropzone.js') }}" ></script>
+
+{{--    <script src="{{asset()}}js/dropzone.js"></script>--}}
 
     <!-- Include styles Drop Zone -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/dropzone.css') }}">
+    <link rel="stylesheet"  href="{{ asset('css/dropzone.css') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
 
     <!-- Include external CSS. -->
@@ -42,6 +47,32 @@
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
+    <!-- For District. -->
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- MDBootstrap Datatables  -->
+    <link href="{{asset('css/cms/datatables.min.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+
+    <!-- Your custom styles (optional) -->
+    <link href="{{asset('css/cms/style.css')}}" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <link href="{{asset('css/cms/select2.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- Include script  -->
+    <script  src="{{ asset('js/cms/select2.min.js') }}" ></script>
+    <script  src="{{ asset('js/dropzone.js') }}" ></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <!-- MDBootstrap Datatables  -->
+    <script type="text/javascript" src="{{asset('js/cms/datatables.min.js')}}"></script>
 </head>
 <body>
 <div id="app">
@@ -78,7 +109,7 @@
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->firstname }} {{Auth::user()->lastname }}<span class="caret"></span>
+                                <i class="fas fa-fw fa-user"></i> {{ Auth::user()->firstname }} {{Auth::user()->lastname }}<span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -105,8 +136,8 @@
             <ul class="sidebar navbar-nav">
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('dashboard')}}">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Users List</span>
                     </a>
                 </li>
 
@@ -118,42 +149,35 @@
                 @elseif(Auth::user()->group_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span style="text-align: center">Add Digital Group or Organize</span></a>
+                            <i class="fas fa-fw fa-building"></i>
+                                <span>
+                                        Add Digital Group
+                                        <br>
+                                        or Organize
+                                </span>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('UserController@create') }}">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add User</span></a>
-                    </li>
+
                 @elseif(Auth::user()->group_id == 2)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
-                            <i class="fas fa-fw fa-chart-area"></i>
+                            <i class="fas fa-fw fa-building"></i>
                             <span style="text-align: center">Add Organize</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('UserController@create') }}">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add User</span></a>
-                    </li>
+
                 @elseif( Auth::user()->group_id == 3)
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ action('UserController@create') }}">
-                                <i class="fas fa-fw fa-chart-area"></i>
-                                <span>Add User</span></a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('NewsController@index') }}">
+                            <i class="fa-fw far fa-newspaper"></i>
+                            <span>News List</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('createNewsType') }}">
-                            <i class="fas fa-fw fa-chart-area"></i>
+                            <i class="fas fa-fw fa-layer-group"></i>
                             <span>Add News Type</span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ action('NewsController@create') }}">
-                            <i class="fas fa-fw fa-chart-area"></i>
-                            <span>Add News</span></a>
-                    </li>
+
                @endif
 
             </ul>
@@ -184,23 +208,34 @@
 
 
 
-{{--    <main class="py-4">--}}
-{{--        @yield('content')--}}
-{{--    </main>--}}
 </div>
 
-<!-- Include external JS libs. -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
 <!-- Include Editor JS files. -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.3/js/froala_editor.pkgd.min.js"></script>
 
+<!-- MDB core JavaScript -->
+{{--<script type="text/javascript" src="{{asset('js/cms/mdb.min.js')}}" async></script>--}}
+
 
 <!-- Initialize the editor. -->
 <script> $(function() { $('textarea').froalaEditor() }); </script>
 <script src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+<script>
+    var msg = '{{Session::get('alert')}}';
+    var exist = '{{Session::has('alert')}}';
+    if(exist){
+        alert(msg);
+    }
+
+    $(document).ready(function () {
+        $('.select2').select2();
+    })
+</script>
+
+
 
 </body>
 </html>

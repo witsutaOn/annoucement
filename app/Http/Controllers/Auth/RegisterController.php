@@ -37,7 +37,7 @@ class RegisterController extends Controller
     {
 //        if(route('register')){
 //            $user = User::all();
-            $group_user= Group_user::where('id', '>', 1)->get();
+            $group_user= Group_user::where('id', '=', 1)->get();
 //            $group_user = DB::table('group_user')->where('id', '=', 1)->get();
             return view('auth.registerSuperAdmin')->with('group_user',$group_user);
 //        }

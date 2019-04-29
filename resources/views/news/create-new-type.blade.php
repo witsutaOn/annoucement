@@ -27,8 +27,8 @@
 
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="col-md-6 offset-md-5">
+                                    <button onclick="addNewType()" type="submit" class="btn btn-primary">
                                         {{ __('Add News Type') }}
                                     </button>
                                 </div>
@@ -39,5 +39,10 @@
             </div>
         </div>
     </div>
+{{--    <script>--}}
+{{--        function addNewType() {--}}
+{{--            confirm("Are you sure to create new type");--}}
+{{--        }--}}
+{{--    </script>--}}
 
 @endsection

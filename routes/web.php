@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('/dashboard', function () {
-//    return view('cms.index');
-//});
+Route::get('/test', function () {
+    return view('test');
+});
 
 //
 
-Route::get('/dashboard', 'UserController@dashboard')->name('dashboard');
+Route::get('/dashboard', 'UserController@index')->name('dashboard');
 //Route::post('login', 'UserController@login');
 //Route::post('register', 'UserController@register');
 //Route::group(['middleware' => 'auth:api'], function(){
@@ -73,3 +73,11 @@ Route::post('/create/news/type', 'NewsController@storeNewsType');
 
 
 
+//Route::get('/province','API\DistrictController@provinces');
+//Route::get('/province/{province_code}/amphoe','API\DistrictController@amphoes');
+//Route::get('/province/{province_code}/amphoe/{amphoe_code}/district','API\DistrictController@districts');
+//Route::get('/province/{province_code}/amphoe/{amphoe_code}/district/{district_code}','API\DistrictController@detail');
+
+//Route::get('/district', function () {
+//    return view("district/index");
+//});

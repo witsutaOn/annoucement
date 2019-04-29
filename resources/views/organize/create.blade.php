@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Add New Type') }}</div>
+                    <div class="card-header">{{ __('Add New Organize') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ action('OrganizeController@store') }}">
@@ -26,10 +26,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="district" type="text" class="form-control" name="phone"  required autofocus>
+                                    <input id="phone" type="text" class="form-control" name="phone"  required autofocus>
 
                                     <span class="invalid-feedback" role="alert"></span>
 
@@ -38,10 +38,10 @@
 
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Fax') }}</label>
+                                <label for="fax" class="col-md-4 col-form-label text-md-right">{{ __('Fax Number') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="district" type="text" class="form-control" name="fax"  required autofocus>
+                                    <input id="fax" type="text" class="form-control" name="fax"  required autofocus>
 
                                     <span class="invalid-feedback" role="alert"></span>
 
@@ -49,17 +49,17 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Office hours') }}</label>
+                                <label for="officeHour" class="col-md-4 col-form-label text-md-right">{{ __('Office Hours') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="district" type="text" class="form-control" name="office_hours"  required autofocus>
+                                    <input id="officeHour" type="text" class="form-control" name="office_hours"  required autofocus>
 
                                     <span class="invalid-feedback" role="alert"></span>
 
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -83,37 +83,45 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="input_province" name="province" onchange="showAmphoes()"
+                                            class="form-control select2" style="width: 100%">
+                                        <option value="">กรุณาเลือกจังหวัด</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Amphoe') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="input_amphoe" name="amphoe" onchange="showDistricts()"
+                                            class="form-control select2" style="width: 100%">
+                                        <option value="">กรุณาเลือกอำเภอ</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
-
                                 <div class="col-md-6">
-                                    <input id="district" type="text" class="form-control" name="district"  required autofocus>
-
-                                        <span class="invalid-feedback" role="alert"></span>
-
-                                </div>
-                            </div>
-
-
-
-                            <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="province" type="text" class="form-control" name="province"  required autofocus>
-
-                                    <span class="invalid-feedback" role="alert"></span>
+                                        <select id="input_district" name="district" onchange="showZipcode()"
+                                                class="form-control select2"  style="width: 100%">
+                                            <option value="">กรุณาเลือกตำบล</option>
+                                        </select>
 
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Postcode') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Zip Code') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="postcode" type="text" class="form-control" name="postcode"  required autofocus>
-
-                                    <span class="invalid-feedback" role="alert"></span>
+                                <div class="col-md-6 f" >
+                                    <input id="input_zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" readonly class="form-control"/>
 
                                 </div>
                             </div>
@@ -140,7 +148,7 @@
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button onclick="addNewOrganize()" type="submit" class="btn btn-primary">
                                         {{ __('Add News Organize') }}
                                     </button>
                                 </div>
@@ -151,5 +159,106 @@
             </div>
         </div>
     </div>
+
+<script>
+    function addNewOrganize() {
+        confirm("Are you sure to create new organize");
+    }
+</script>
+
+<script>
+    $(document).ready(function(){
+        // console.log("HELLO");
+        showProvinces();
+    });
+
+    function ajax(url, callback){
+        $.ajax({
+            "url" : url,
+            "type" : "GET",
+            "dataType" : "json",
+        })
+            .done(callback); //END AJAX
+    }
+    function showProvinces(){
+        //PARAMETERS
+        var url = "{{ url('/') }}/api/province";
+        var callback = function(result){
+            $("#input_province").empty();
+            for(var i=0; i<result.length; i++){
+                $("#input_province").append(
+                    $('<option></option>')
+                        .attr("value", ""+result[i].province_code)
+                        .html(""+result[i].province)
+                );
+            }
+            showAmphoes();
+        };
+        //CALL AJAX
+        ajax(url,callback);
+    }
+
+    function showAmphoes(){
+        //INPUT
+        // console.log("2");
+        var province_code = $("#input_province").val();
+        //PARAMETERS
+        var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe";
+        var callback = function(result){
+            //console.log(result);
+            $("#input_amphoe").empty();
+            for(var i=0; i<result.length; i++){
+                $("#input_amphoe").append(
+                    $('<option></option>')
+                        .attr("value", ""+result[i].amphoe_code)
+                        .html(""+result[i].amphoe)
+                );
+            }
+            showDistricts();
+        };
+        //CALL AJAX
+        ajax(url,callback);
+    }
+
+    function showDistricts(){
+        //INPUT
+        var province_code = $("#input_province").val();
+        var amphoe_code = $("#input_amphoe").val();
+        //PARAMETERS
+        var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe/"+amphoe_code+"/district";
+        var callback = function(result){
+            //console.log(result);
+            $("#input_district").empty();
+            for(var i=0; i<result.length; i++){
+                $("#input_district").append(
+                    $('<option></option>')
+                        .attr("value", ""+result[i].district_code)
+                        .html(""+result[i].district)
+                );
+            }
+            showZipcode();
+        };
+        //CALL AJAX
+        ajax(url,callback);
+    }
+
+    function showZipcode(){
+        //INPUT
+        var province_code = $("#input_province").val();
+        var amphoe_code = $("#input_amphoe").val();
+        var district_code = $("#input_district").val();
+        //PARAMETERS
+        var url = "{{ url('/') }}/api/province/"+province_code+"/amphoe/"+amphoe_code+"/district/"+district_code;
+        var callback = function(result){
+            //console.log(result);
+            for(var i=0; i<result.length; i++){
+                $("#input_zipcode").val(result[i].zipcode);
+            }
+        };
+        //CALL AJAX
+        ajax(url,callback);
+    }
+
+</script>
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\District;
 use App\Group_user;
 use App\Organize;
 use App\User;
@@ -45,25 +46,35 @@ class OrganizeController extends Controller
      */
     public function store(Request $request)
     {
+        $zipcode = $request->input('zipcode');
 
+        $address_data = District::where('zipcode', '=', $zipcode)->first();
+//        dd(District::where('zipcode', '=', $zipcode)->first());
+        if($address_data)
 
-        //
-        $attributes = request()->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required','string'] ,
-            'fax' => ['required','string'] ,
-            'email' => ['required','string','email'] ,
-            'office_hours' => ['required','string'] ,
-            'group_id' => ['required', 'integer'],
-            'address' => ['required', 'string'],
-            'district' => ['required', 'string'],
-            'province' => ['required', 'string' ],
-            'postcode' => ['required' ],
-        ]);
+            $attributes = request()->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'phone' => ['required','string'] ,
+                'fax' => ['required','string'] ,
+                'email' => ['required','string','email'] ,
+                'office_hours' => ['required','string'] ,
+                'group_id' => ['required', 'integer'],
+                'address' => ['required', 'string'],
+            ]);
+            $organize = new Organize();
 
-        Organize::create($attributes);
+            $organize->name = $request->name;
+            $organize->phone = $request->phone;
+            $organize->fax = $request->fax;
+            $organize->email = $request->email;
+            $organize->office_hours = $request->office_hours;
+            $organize->group_id = $request->group_id;
+            $organize->address = $request->address;
+            $organize->district_id = $address_data->id;
 
-        return redirect()->action('OrganizeController@index');
+            $organize->save();
+
+        return redirect()->action('OrganizeController@index')->with('alert', 'Complete');;
     }
 
     /**

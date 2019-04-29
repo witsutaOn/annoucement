@@ -62,9 +62,8 @@ class AuthController extends Controller
 
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials))
-            return response()->json([
-                'message' => 'Unauthorized'
-            ], 401);
+            return redirect()->back() ->with('alert', 'Email or Password Incorrect');
+
         $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
@@ -81,7 +80,7 @@ class AuthController extends Controller
 
         $organize_id = Auth::user()->organize_id;
         $news = News::all()->where('organize_id','==',$organize_id);
-        return redirect()->action('UserController@dashboard');
+        return redirect()->action('UserController@index');
 //            view('cms.index')->with('tokenData',$tokenData)->with('news',$news)->with('user',$user);
 //        return view('cms.index')->with('tokenData',$tokenData);
     }

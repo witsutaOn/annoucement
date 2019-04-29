@@ -24,9 +24,10 @@ class CreateOrganizeTable extends Migration
 
             $table->bigInteger('group_id');
             $table->string('address');
-            $table->string('district');
-            $table->string('province');
-            $table->char('postcode');
+            $table->BigInteger('district_id')->unsigned()->references('id')->on('districts');
+//            $table->string('district');
+//            $table->string('province');
+//            $table->char('postcode');
             $table->timestamps();
         });
     }

@@ -9,6 +9,7 @@ use App\Organize;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Schema;
 use \Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class UserController extends Controller
         if ($group_id == 1) {
             $group_users = Group_user::all();
             $organizes = Organize::all();
-            $users = $this->getUsers()->paginate();
+            $users = $this->getUsers()->orderBy('group_id', 'ASC')->paginate();
 
             return view('cms.index')
                 ->with([
@@ -49,9 +50,14 @@ class UserController extends Controller
         } else {
 
             $organize_id = Auth::user()->organize_id;
-            $users =  $this->getUsers()->where('organize_id', $organize_id)->paginate();
+            $users = $this->getUsers()->where('organize_id', $organize_id)->orderBy('group_id', 'ASC')->paginate();
 
-            return view('cms.index')->with('users', $users)->with('group_id', $group_id);
+            return view('cms.index')
+                ->with([
+                    'users' => $users,
+                    'group_id' => $group_id
+                ]);
+
         }
     }
 
@@ -62,6 +68,7 @@ class UserController extends Controller
         $users = User::select(
             '*'
         );
+
         $users = $this->filter($users, $filterData);
 
         return $users;
@@ -70,22 +77,18 @@ class UserController extends Controller
     public function filter($model, $filterData)
     {
         foreach ($filterData as $key => $value) {
-            if(!empty($value)){
-                $model->where("$key", $value);
+            //check whether users table has email column
+            if (Schema::hasColumn('users', $key))
+            {
+                if (!empty($value)) {
+                    $model->where("$key", 'LIKE', "%$value%");
+                }
             }
+
         }
         return $model;
     }
 
-//    public function dashboard()
-//    {
-//        $organize_id = Auth::user()->organize_id;
-//        $data = News::find($organize_id);
-//        $news = News::all()->where('organize_id','==',$organize_id);
-//        $users = User::all()->where('organize_id','==',$organize_id);
-////        dd($users);
-//        return view('cms.index')->with('users',$users)->with('news',$news);
-//    }
     public function login()
     {
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
@@ -166,14 +169,18 @@ class UserController extends Controller
             'organize_id' => $data['organize_id'],
         ]);
 
-        return redirect()->action('UserController@dashboard');
+        return redirect()->action('UserController@index');
     }
 
     public function destroy($id)
     {
-        User::find($id)->delete();
+        $user = User::find($id);
+        if( Auth::user()->group_id < 3){
+            if ($user and $user->group_id > Auth::user()->group_id)
+                $user->delete();
+        }
 
-        return Redirect::route('dashboard');
+        return Redirect::action('UserController@index');
     }
 
 

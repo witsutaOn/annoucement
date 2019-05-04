@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Edit News') }}</div>
+                    <div class="card-header">{{ __('แก้ไขข่าว') }}</div>
 
                     <div class="card-body">
                         <form action="{{ action('NewsController@update', ['id'=> $news['id'] ]) }}" method="post"  enctype="multipart/form-data">
@@ -32,16 +32,16 @@
                             </div>
                             <div class="row form-group ">
                                 <div class=" col-sm-6">
-                                    <label  for="inputNewsType">Publish Status</label>
+                                    <label  for="inputNewsType">สถานะการประกาศข่าว</label>
                                     <select class="custom-select " id="inlineFormCustomSelectPref2" name="publish_status">
 
-                                        <option value="0" {{old('publish_status',$news->publish_status)==0  ? 'selected' : ''}}>Not Publish</option>
+                                        <option value="0" {{old('publish_status',$news->publish_status)==0  ? 'selected' : ''}}>ยังไม่เผยแพร่</option>
 
-                                        <option value="1" {{old('publish_status',$news->publish_status)==1  ? 'selected' : ''}}>Publish</option>
+                                        <option value="1" {{old('publish_status',$news->publish_status)==1  ? 'selected' : ''}}>กำลังเผยแพร่</option>
                                     </select>
                                 </div>
                                 <div class=" col-sm-6">
-                                    <label for="example-date-input" >Date </label>
+                                    <label for="example-date-input" >วันที่ประกาศข่าว</label>
                                     <input class="form-control" id="published_at"
                                            type="datetime-local" name="published_at" value="{{ \Carbon\Carbon::parse(old('published_at',$news->published_at))->toDateTimeLocalString() }}">
                                 </div>
@@ -49,13 +49,13 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputNewsContent">เนื้อหาข่าว</label>
-                                {{--            <textarea rows="4" name="content"></textarea>--}}
-                                <input class="form-control" type="text"  id="content" name="content" value="{{old('content',$news->content)}}">
+                                            <textarea rows="4" name="content">{{old('content',$news->content)}}</textarea>
+
                             </div>
 
 
                             <div class="form-group ">
-                                <label for="name" >{{ __('รูปข่าว') }}</label>
+                                <label for="name" >{{ __('ลบรูปข่าว (ทำเครื่องหมาย ') }} <i class="fas fa-check"></i> {{__(' ที่รูปภาพ หากต้องการลบ)')}}</label>
                                     <div class="form-group row" >
                                         <?php  $count=0;?>
                                             @foreach ($images as $image)
@@ -136,6 +136,7 @@
 
             document.getElementById('imageName').innerHTML=name;
         }
+
     </script>
 
 

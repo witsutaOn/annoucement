@@ -6,13 +6,13 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Add New Organize') }}</div>
+                    <div class="card-header">{{ __('เพิ่มหน่วยงาน') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ action('OrganizeController@store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อหน่วยงาน') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="nameOrganize" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name"  required autofocus>
@@ -26,40 +26,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control" name="phone"  required autofocus>
-
-                                    <span class="invalid-feedback" role="alert"></span>
-
-                                </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="fax" class="col-md-4 col-form-label text-md-right">{{ __('Fax Number') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="fax" type="text" class="form-control" name="fax"  required autofocus>
-
-                                    <span class="invalid-feedback" role="alert"></span>
-
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="officeHour" class="col-md-4 col-form-label text-md-right">{{ __('Office Hours') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="officeHour" type="text" class="form-control" name="office_hours"  required autofocus>
-
-                                    <span class="invalid-feedback" role="alert"></span>
-
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('อีเมล์') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
@@ -71,8 +38,43 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
+                                <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('โทรศัพท์') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" class="form-control" name="phone"  required autofocus>
+
+                                    <span class="invalid-feedback" role="alert" ></span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="fax" class="col-md-4 col-form-label text-md-right">{{ __('โทรสาร') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="fax" type="text" class="form-control" name="fax"  required autofocus>
+
+                                    <span class="invalid-feedback" role="alert"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="officeHour" class="col-md-4 col-form-label text-md-right">{{ __('เวลาทำการ') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="officeHour" type="text" class="form-control" name="office_hours"  required autofocus>
+
+                                    <span class="invalid-feedback" role="alert"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text" class="form-control" name="address"  required autofocus>
@@ -83,7 +85,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
+                                <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('จังหวัด') }}</label>
 
                                 <div class="col-md-6">
                                     <select id="input_province" name="province" onchange="showAmphoes()"
@@ -94,7 +96,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Amphoe') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('อำเภอ/เขต') }}</label>
 
                                 <div class="col-md-6">
                                     <select id="input_amphoe" name="amphoe" onchange="showDistricts()"
@@ -106,7 +108,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('District') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ตำบล/แขวง') }}</label>
                                 <div class="col-md-6">
                                         <select id="input_district" name="district" onchange="showZipcode()"
                                                 class="form-control select2"  style="width: 100%">
@@ -118,7 +120,7 @@
 
 
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Zip Code') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('รหัสไปรษณีย์') }}</label>
 
                                 <div class="col-md-6 f" >
                                     <input id="input_zipcode" name="zipcode" placeholder="รหัสไปรษณีย์" readonly class="form-control"/>
@@ -126,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Group User') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ประเภทของผู้ใช้') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select "  name="group_id" required>
@@ -147,9 +149,9 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
-                                    <button onclick="addNewOrganize()" type="submit" class="btn btn-primary">
-                                        {{ __('Add News Organize') }}
+                                <div class="col-md-6 offset-md-5">
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('เพิ่ม') }}
                                     </button>
                                 </div>
                             </div>
@@ -159,12 +161,6 @@
             </div>
         </div>
     </div>
-
-<script>
-    function addNewOrganize() {
-        confirm("Are you sure to create new organize");
-    }
-</script>
 
 <script>
     $(document).ready(function(){

@@ -16,17 +16,13 @@ Route::get('/', function () {
 });
 
 Route::get('/test', function () {
-    return view('test');
+    return view('auth.login');
 });
 
-//
+
 
 Route::get('/dashboard', 'UserController@index')->name('dashboard');
-//Route::post('login', 'UserController@login');
-//Route::post('register', 'UserController@register');
-//Route::group(['middleware' => 'auth:api'], function(){
-//    Route::post('details', 'UserController@details');
-//});
+
 Route::get('/register', 'RegisterController@show')->name('showRegistry');
 
 Route::group([
@@ -47,8 +43,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/news', 'NewsController');
 
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('login', 'Auth\LoginController@login');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
@@ -64,20 +60,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::resource('users', 'UserController');
 
-
 Route::resource('organize', 'OrganizeController');
 
-Route::get('/create/news/type', 'NewsController@createNewsType')->name('createNewsType');
-
-Route::post('/create/news/type', 'NewsController@storeNewsType');
+Route::resource('/newstype', 'NewsTypeController');
 
 
-
-//Route::get('/province','API\DistrictController@provinces');
-//Route::get('/province/{province_code}/amphoe','API\DistrictController@amphoes');
-//Route::get('/province/{province_code}/amphoe/{amphoe_code}/district','API\DistrictController@districts');
-//Route::get('/province/{province_code}/amphoe/{amphoe_code}/district/{district_code}','API\DistrictController@detail');
-
-//Route::get('/district', function () {
-//    return view("district/index");
-//});

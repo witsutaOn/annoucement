@@ -10,4 +10,5 @@ class News_type extends Model
     protected $table = 'news_type';
 
     protected $fillable = ['type'];
+
 }

@@ -9,20 +9,60 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class NewsController extends Controller
 {
-    public function index(){
-        $news = News::all();
+    public function index()
+    {
+//
+        $news = $this->getNews()->where('organize_id', Auth::user()->organize_id)->paginate();
         $news_type = News_type::all();
         return view('news.index')->with('news', $news)->with('news_type',$news_type);
     }
+
+    function getNews()
+    {
+        $filterData = Input::get();
+
+        $news = News::select(
+            '*'
+        );
+
+        $news = $this->filter($news, $filterData);
+
+        return $news;
+    }
+
+    public function apiGetNews()
+    {
+        $news = $this->getNews()->paginate();
+
+        return response()->json(['status' => 'success', 'newsType' => $news]);
+    }
+
+    public function filter($model, $filterData)
+    {
+        foreach ($filterData as $key => $value) {
+
+            if (Schema::hasColumn('news', $key))
+            {
+                if (!empty($value)) {
+                    $model->where("$key", 'LIKE', "%$value%");
+                }
+            }
+        }
+        return $model;
+    }
+
     public function create(){
         $news_type = News_type::all();
         return view('news.create')->with('news_type', $news_type);
     }
+
     public function store(Request $request){
        $request->validate([
             'type_id' => ['required','integer'],
@@ -54,43 +94,27 @@ class NewsController extends Controller
             $news->view_count=0;
 
             $news->save();
-            $news_type = News_type::all();
-            return view('news.create')->with('news_type',$news_type);
+
+            return Redirect::action('NewsController@index');
         }
     }
 
-    public function show($id)
+    public function show()
     {
-        $news = News::findOrFail($id);
-        return view('news.show')->with('news', $news);
+        $news = $this->getNews()->where('organize_id', Auth::user()->organize_id)->paginate();
+        $news_type = News_type::all();
+        return view('news.index')->with('news', $news)->with('news_type',$news_type);
     }
 
-    public function createNewsType()
-    {
-        return view('news.create-new-type');
 
-    }
-    public function storeNewsType(Request $request){
-        $attributes =  request()->validate([
-            'type' => ['required','string'],
-        ]);
-        $type = request(['type', 'password']);
-        if (News_type::where('type', '=', $type)->exists())
-//        if(!News_type::attempt($type))
-            return redirect()->back() ->with('alert', 'Type is duplicate');
-
-        News_type::create($attributes);
-        return view('news.create-new-type')->with('alert', 'Complete');
-        ;
-    }
     public function destroy($id)
     {
 
         News::find($id)->delete();
-
-        return Redirect::route('dashboard');
+        return Redirect::action('NewsController@index');
 
     }
+
 
     public function edit($id)
     {
@@ -98,7 +122,7 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         $data = News::find($id);
         $images= json_decode($data->images);
-//        dd($images);
+
         return view('news.edit')->with('news', $news)->with('news_type',$news_type)->with('images',$images);
     }
 
@@ -139,7 +163,6 @@ class NewsController extends Controller
 
 
         }
-//dd($data);
         $data = json_encode(array_values($data));
 
         $news = News::findOrFail($id);
@@ -150,7 +173,8 @@ class NewsController extends Controller
         $news->published_at = $request->input('published_at');
         $news->images=$data;
         $news->save();
-        return Redirect::route('dashboard');
+
+        return Redirect::action('NewsController@index');
     }
 }
 

@@ -21,3 +21,10 @@ Route::get('/province','API\DistrictController@provinces');
 Route::get('/province/{province_code}/amphoe','API\DistrictController@amphoes');
 Route::get('/province/{province_code}/amphoe/{amphoe_code}/district','API\DistrictController@districts');
 Route::get('/province/{province_code}/amphoe/{amphoe_code}/district/{district_code}','API\DistrictController@detail');
+
+
+
+Route::get('organize','OrganizeController@apiGetOrganizes');
+Route::get('newstype','NewsTypeController@apiGetNewsType');
+Route::get('news','NewsController@apiGetNews');
+Route::get('districts','DistrictController@apiGetDistricts');

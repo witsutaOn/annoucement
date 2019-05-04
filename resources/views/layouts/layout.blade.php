@@ -121,23 +121,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-{{--                <li class="nav-item dropdown">--}}
-{{--                    <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"--}}
-{{--                       aria-haspopup="true" aria-expanded="false">--}}
-{{--                        <i class="fas fa-fw fa-folder"></i>--}}
-{{--                        <span>Pages</span>--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-menu" aria-labelledby="pagesDropdown">--}}
-{{--                        <h6 class="dropdown-header">Login Screens:</h6>--}}
-{{--                        <a class="dropdown-item" href="login.blade.php">Login</a>--}}
-{{--                        <a class="dropdown-item" href="register.blade.php">Register</a>--}}
-{{--                        <a class="dropdown-item" href="forgot-password.blade.php">Forgot Password</a>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <h6 class="dropdown-header">Other Pages:</h6>--}}
-{{--                        <a class="dropdown-item" href="404.blade.php">404 Page</a>--}}
-{{--                        <a class="dropdown-item" href="blank.blade.php">Blank Page</a>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ action('NewsController@create') }}">
                         <i class="fas fa-fw fa-chart-area"></i>

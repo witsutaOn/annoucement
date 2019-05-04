@@ -16,7 +16,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Add News') }}</div>
+                    <div class="card-header">{{ __('เพิ่มข่าว') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ action('NewsController@store') }}"  enctype="multipart/form-data">
@@ -37,10 +37,10 @@
                             </div>
                             <div class="form-group row">
                                 <div class=" col-md-6">
-                                    <label  for="inputNewsType">{{ __('Publish Status')}}</label>
+                                    <label  for="inputNewsType">{{ __('สถานะการประกาศข่าว')}}</label>
                                     <select class="custom-select " id="inlineFormCustomSelectPref2" name="publish_status">
-                                        <option value="0">Not Publish</option>
-                                        <option value="1">Publish</option>
+                                        <option value="0">ยังไม่เผยแพร่</option>
+                                        <option value="1">กำลังเผยแพร่</option>
                                     </select>
                                 </div>
 
@@ -54,8 +54,8 @@
 
                             <div class="form-group">
                                 <label for="name" >{{ __('เนื้อหาข่าว') }}</label>
-                                {{--            <textarea rows="4" name="content"></textarea>--}}
-                                <input class="form-control" type="text"  id="content" name="content">
+                                            <textarea rows="4" name="content"></textarea>
+{{--                                <input class="form-control" type="text"  id="content" name="content">--}}
 
                             </div>
 
@@ -88,31 +88,6 @@
 
 <script>
 
-    // $(function() {
-    //     // Multiple images preview in browser
-    //     var imagesPreview = function(input, placeToInsertImagePreview) {
-    //
-    //         if (input.files) {
-    //             var filesAmount = input.files.length;
-    //
-    //             for (i = 0; i < filesAmount; i++) {
-    //                 var reader = new FileReader();
-    //
-    //                 reader.onload = function(event) {
-    //                     $($.parseHTML('<img style="width: 300px;">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-    //                 }
-    //
-    //                 reader.readAsDataURL(input.files[i]);
-    //             }
-    //         }
-    //
-    //     };
-    //
-    //     $('#customFile').on('change', function() {
-    //         imagesPreview(this, 'div.gallery');
-    //     });
-    // });
-
     function getImage(object){
         var i;
         var name="";
@@ -128,6 +103,8 @@
 
         document.getElementById('imageName').innerHTML=name;
     }
+
+
 
 </script>
 

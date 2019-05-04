@@ -7,9 +7,6 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Material Design Bootstrap -->
-{{--    <link href="{{asset('css/cms/mdb.min.css')}}" rel="stylesheet">--}}
-
     <!-- Custom fonts for this template-->
     <link href="{{asset('cmsVendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
 
@@ -18,6 +15,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/cms/sb-admin.css')}}" rel="stylesheet">
+
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -69,7 +67,7 @@
     <script  src="{{ asset('js/cms/select2.min.js') }}" ></script>
     <script  src="{{ asset('js/dropzone.js') }}" ></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
 
     <!-- MDBootstrap Datatables  -->
     <script type="text/javascript" src="{{asset('js/cms/datatables.min.js')}}"></script>
@@ -77,11 +75,10 @@
 <body>
 <div id="app">
 
-<!--    --><?php //dd( Auth::user()->group_id);?>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top navbar-laravel">
         <div class="container-fluid">
             <a class="navbar-brand mr-1" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                {{ __('Announcement') }}
             </a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -99,11 +96,11 @@
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('เข้าสู่ระบบ') }}</a>
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('register') }}">{{ __('สมัครใช้งาน') }}</a>
                             </li>
                         @endif
                     @else
@@ -116,7 +113,7 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('ออกจากระบบ') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -137,32 +134,30 @@
                 <li class="nav-item ">
                     <a class="nav-link" href="{{route('dashboard')}}">
                         <i class="fas fa-fw fa-user"></i>
-                        <span>Users List</span>
+                        <span>รายชื่อผู้ใช้</span>
                     </a>
                 </li>
 
                 @if (Auth::guest() && !route('register'))
                     <script>
                         window.location = "/login";
-                        alert("Please login");
+                        alert("โปรดเข้าสู่ระบบก่อนใช้งาน");
                     </script>
                 @elseif(Auth::user()->group_id == 1)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
+                        <a class="nav-link" href="{{ action('OrganizeController@index' )}}">
                             <i class="fas fa-fw fa-building"></i>
                                 <span>
-                                        Add Digital Group
-                                        <br>
-                                        or Organize
+                                        หน่วยงาน
                                 </span>
                         </a>
                     </li>
 
                 @elseif(Auth::user()->group_id == 2)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ action('OrganizeController@create' )}}">
+                        <a class="nav-link" href="{{ action('OrganizeController@index' )}}">
                             <i class="fas fa-fw fa-building"></i>
-                            <span style="text-align: center">Add Organize</span></a>
+                            <span style="text-align: center">หน่วยงาน</span></a>
                     </li>
 
                 @elseif( Auth::user()->group_id == 3)
@@ -170,12 +165,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ action('NewsController@index') }}">
                             <i class="fa-fw far fa-newspaper"></i>
-                            <span>News List</span></a>
+                            <span>ข่าว</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('createNewsType') }}">
+                        <a class="nav-link" href="{{ action('NewsTypeController@index') }}">
                             <i class="fas fa-fw fa-layer-group"></i>
-                            <span>Add News Type</span></a>
+                            <span>ประเภทข่าว</span></a>
                     </li>
 
                @endif
@@ -199,7 +194,7 @@
             <footer class="sticky-footer">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2019</span>
+                        <span>Copyright © Website 2019</span>
                     </div>
                 </div>
             </footer>

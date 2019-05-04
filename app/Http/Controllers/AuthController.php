@@ -26,7 +26,6 @@ class AuthController extends Controller
             'lastname' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed|min:8',
-//            'organize_id' => 'required|integer',
             'group_id' => 'required|integer',
         ]);
         $user = new User([
@@ -34,7 +33,6 @@ class AuthController extends Controller
             'lastname' => $request->lastname,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-//            'organize_id' => $request->organize_id,
             'group_id' => $request->group_id,
         ]);
         $user->save();
@@ -78,11 +76,7 @@ class AuthController extends Controller
             )->toDateTimeString()
         ]);
 
-        $organize_id = Auth::user()->organize_id;
-        $news = News::all()->where('organize_id','==',$organize_id);
         return redirect()->action('UserController@index');
-//            view('cms.index')->with('tokenData',$tokenData)->with('news',$news)->with('user',$user);
-//        return view('cms.index')->with('tokenData',$tokenData);
     }
 
     /**

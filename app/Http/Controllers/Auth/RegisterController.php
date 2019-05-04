@@ -35,14 +35,9 @@ class RegisterController extends Controller
 
     public function showRegister()
     {
-//        if(route('register')){
-//            $user = User::all();
-            $group_user= Group_user::where('id', '=', 1)->get();
-//            $group_user = DB::table('group_user')->where('id', '=', 1)->get();
-            return view('auth.registerSuperAdmin')->with('group_user',$group_user);
-//        }
-//        else{
-//
+        $group_user= Group_user::where('id', '=', 1)->get();
+
+        return view('auth.registerSuperAdmin')->with('group_user',$group_user);
     }
     /**
      * Create a new controller instance.
@@ -73,12 +68,7 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
+
     protected function create(array $data)
     {
         return Validator::make($data, [

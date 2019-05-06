@@ -152,6 +152,16 @@
                                 </span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('NewsController@index') }}">
+                            <i class="fa-fw far fa-newspaper"></i>
+                            <span>ข่าว</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ action('NewsTypeController@index') }}">
+                            <i class="fas fa-fw fa-layer-group"></i>
+                            <span>ประเภทข่าว</span></a>
+                    </li>
 
                 @elseif(Auth::user()->group_id == 2)
                     <li class="nav-item">

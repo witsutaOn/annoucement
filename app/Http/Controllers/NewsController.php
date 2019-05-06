@@ -19,7 +19,15 @@ class NewsController extends Controller
     public function index()
     {
 //
-        $news = $this->getNews()->where('organize_id', Auth::user()->organize_id)->paginate();
+        $news = $this->getNews();
+
+        if(Auth::user()->group_id == 1){
+            $news = $news->paginate();
+        }else{
+            $news = $news->where('organize_id', Auth::user()->organize_id)
+                ->paginate();
+        }
+
         $news_type = News_type::all();
         return view('news.index')->with('news', $news)->with('news_type',$news_type);
     }

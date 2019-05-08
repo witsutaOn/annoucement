@@ -42,7 +42,8 @@ class NewsController extends Controller
         $filterData = Input::get();
 
         $news = News::with([
-            'organize'
+            'organize',
+            'newsType:id,type'
         ])->select();
 
         $organizes = Organize::select('*');

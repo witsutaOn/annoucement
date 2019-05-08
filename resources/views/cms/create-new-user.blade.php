@@ -12,7 +12,7 @@
                         <form method="POST" action="{{ action('UserController@store') }}">
                             @csrf
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อจริง') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อ') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control{{ $errors->has('firstname') ? ' is-invalid' : '' }}" name="firstname" value="{{ old('name') }}" required autofocus>
@@ -76,7 +76,7 @@
 
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('องค์กร') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อน่วยงาน') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select " name="organize_id" required>
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ระดับของผู้ใช้') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ประเภทของผู้ใช้') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select "  name="group_id" required>

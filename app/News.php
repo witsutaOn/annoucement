@@ -16,4 +16,9 @@ class News extends Model
     {
         return $this->belongsTo(Organize::class, 'organize_id');
     }
+    public function newsType()
+    {
+        return $this->belongsTo(News_type::class, 'type_id');
+    }
+
 }

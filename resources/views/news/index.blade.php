@@ -26,7 +26,7 @@
 
                                 <select id="organize_name" name="name"
                                         class="form-control mb-2 select2" >
-                                    <option value="" hidden>องค์กร</option>
+                                    <option value="" hidden>ชื่อหน่วยงาน</option>
                                     @foreach($organizes as $organize)
                                         <option value="{{ $organize->name}}">{{ $organize->name}}</option>
                                     @endforeach
@@ -50,7 +50,7 @@
                             <th style="width:20%">หัวข้อข่าว</th>
                             <th style="width:20%">รูปข่าว</th>
                             <th style="width:30%">เนื้อหา</th>
-                            <th style="width:20%">องค์กร</th>
+                            <th style="width:20%">ชื่อหน่วยงาน</th>
                             <th style="width:5%;text-align: center">แก้ไข</th>
                             <th style="width:5%;text-align: center">ลบ</th>
                         @else
@@ -68,7 +68,7 @@
                             <th style="width:20%">หัวข้อข่าว</th>
                             <th style="width:20%">รูปข่าว</th>
                             <th style="width:30%">เนื้อหา</th>
-                            <th style="width:20%">องค์กร</th>
+                            <th style="width:20%">ชื่อหน่วยงาน</th>
                             <th style="width:5%;text-align: center">แก้ไข</th>
                             <th style="width:5%;text-align: center">ลบ</th>
                         @else

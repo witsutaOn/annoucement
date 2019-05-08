@@ -111,10 +111,10 @@ class OrganizeController extends Controller
         if($address_data)
 
             $attributes = request()->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'name' => ['required', 'string', 'max:255','unique:organize'],
                 'phone' => ['required','string'] ,
                 'fax' => ['required','string'] ,
-                'email' => ['required','string','email'] ,
+                'email' => ['required','string','email','unique:organize'] ,
                 'office_hours' => ['required','string'] ,
                 'group_id' => ['required', 'integer'],
                 'address' => ['required', 'string'],

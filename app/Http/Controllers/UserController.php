@@ -143,7 +143,12 @@ class UserController extends Controller
     public function create()
     {
         $news_type = News_type::all();
-        $organize = Organize::all();
+//        dd(Auth::user()->group_id,Auth::user()->organize_id);
+        if(Auth::user()->group_id !=1){
+            $organize = Organize::all()->where('id','=',Auth::user()->organize_id);
+        }else{
+            $organize = Organize::all();
+        }
         $group_user = Group_user::where('id', '>=', Auth::user()->group_id)->get();
 //
         return view('cms.create-new-user')->with('news_type', $news_type)->with('organize', $organize)->with('group_user', $group_user);

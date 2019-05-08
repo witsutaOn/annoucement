@@ -11,4 +11,9 @@ class News extends Model
     protected $table = 'news';
     protected $fillable = ['type_id', 'organize_id','user_id','images',
         'title','content','published_at','publish_status','view_count'];
+
+    public function organize()
+    {
+        return $this->belongsTo(Organize::class, 'organize_id');
+    }
 }

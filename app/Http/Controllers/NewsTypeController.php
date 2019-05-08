@@ -63,12 +63,12 @@ class NewsTypeController extends Controller
     public function store(Request $request)
     {
         $attributes =  request()->validate([
-            'type' => ['required','string'],
+            'type' => ['required','string','unique:news_type'],
         ]);
-        $type = request(['type', 'password']);
+//        $type = request(['type', 'password','unique:news_type']);
 
-        if (News_type::where('type', '=', $type)->exists())
-            return redirect()->back() ->with('alert', 'Type is duplicate');
+//        if (News_type::where('type', '=', $type)->exists())
+//            return redirect()->back() ->with('alert', 'Type is duplicate');
 
         News_type::create($attributes);
 

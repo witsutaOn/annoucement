@@ -28,19 +28,32 @@ class NewsController extends Controller
                 ->paginate();
         }
 
+        $organizes = Organize::all();
         $news_type = News_type::all();
-        return view('news.index')->with('news', $news)->with('news_type',$news_type);
+        return view('news.index')->with([
+            'news' => $news,
+            'news_type' => $news_type,
+            'organizes' => $organizes,
+        ]);
     }
 
     function getNews()
     {
         $filterData = Input::get();
 
-        $news = News::select(
-            '*'
-        );
+        $news = News::with([
+            'organize'
+        ])->select();
 
-        $news = $this->filter($news, $filterData);
+        $organizes = Organize::select('*');
+        $organizes = $this->filter('organize', $organizes, $filterData)->pluck('id');
+
+        $news = $this->filter('news',$news, $filterData);
+
+
+        if(count($organizes) > 0){
+            $news->whereIn('organize_id', $organizes);
+        }
 
         return $news;
     }
@@ -52,11 +65,11 @@ class NewsController extends Controller
         return response()->json(['status' => 'success', 'newsType' => $news]);
     }
 
-    public function filter($model, $filterData)
+    public function filter($table,$model, $filterData)
     {
         foreach ($filterData as $key => $value) {
 
-            if (Schema::hasColumn('news', $key))
+            if (Schema::hasColumn($table, $key))
             {
                 if (!empty($value)) {
                     $model->where("$key", 'LIKE', "%$value%");
@@ -111,7 +124,12 @@ class NewsController extends Controller
     {
         $news = $this->getNews()->where('organize_id', Auth::user()->organize_id)->paginate();
         $news_type = News_type::all();
-        return view('news.index')->with('news', $news)->with('news_type',$news_type);
+        $organize = Organize::all();
+        return view('news.index')->with([
+            'news'=> $news,
+            'news_type'=>$news_type,
+            'organize' => $organize,
+        ]);
     }
 
 

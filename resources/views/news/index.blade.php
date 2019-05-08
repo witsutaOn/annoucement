@@ -21,11 +21,20 @@
                             <input type="text" class="form-control mb-2" id="title" name="title" value=""
                                    placeholder="หัวข้อข่าว">
                         </div>
-{{--                        <div class="col-auto">--}}
-{{--                            <label class="sr-only" for="inlineFormInput">Last Name</label>--}}
-{{--                            <input type="text" class="form-control mb-2" id="inlineFormInput" name="lastname"--}}
-{{--                                   placeholder="Last Name">--}}
-{{--                        </div>--}}
+                        @if(Auth::user()->group_id==1 )
+                            <div class="col-auto" style="margin-top: -8px">
+
+                                <select id="organize_name" name="name"
+                                        class="form-control mb-2 select2" >
+                                    <option value="" hidden>องค์กร</option>
+                                    @foreach($organizes as $organize)
+                                        <option value="{{ $organize->name}}">{{ $organize->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                        @endif
                         <div class="col-auto">
                             <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
                         </div>
@@ -37,20 +46,38 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                     <tr>
-                        <th style="width:20%">หัวข้อข่าว</th>
-                        <th style="width:20%">รูปข่าว</th>
-                        <th style="width:40%">เนื้อหา</th>
-                        <th style="width:10%;text-align: center">แก้ไข</th>
-                        <th style="width:10%;text-align: center">ลบ</th>
+                        @if(Auth::user()->group_id==1 )
+                            <th style="width:20%">หัวข้อข่าว</th>
+                            <th style="width:20%">รูปข่าว</th>
+                            <th style="width:30%">เนื้อหา</th>
+                            <th style="width:20%">องค์กร</th>
+                            <th style="width:5%;text-align: center">แก้ไข</th>
+                            <th style="width:5%;text-align: center">ลบ</th>
+                        @else
+                            <th style="width:20%">หัวข้อข่าว</th>
+                            <th style="width:20%">รูปข่าว</th>
+                            <th style="width:40%">เนื้อหา</th>
+                            <th style="width:10%;text-align: center">แก้ไข</th>
+                            <th style="width:10%;text-align: center">ลบ</th>
+                        @endif
                     </tr>
                     </thead>
                     <tfoot>
                     <tr>
-                        <th style="width:20%">หัวข้อข่าว</th>
-                        <th style="width:20%">รูปข่าว</th>
-                        <th style="width:40%">เนื้อหา</th>
-                        <th style="width:10%;text-align: center">แก้ไข</th>
-                        <th style="width:10%;text-align: center">ลบ</th>
+                        @if(Auth::user()->group_id==1 )
+                            <th style="width:20%">หัวข้อข่าว</th>
+                            <th style="width:20%">รูปข่าว</th>
+                            <th style="width:30%">เนื้อหา</th>
+                            <th style="width:20%">องค์กร</th>
+                            <th style="width:5%;text-align: center">แก้ไข</th>
+                            <th style="width:5%;text-align: center">ลบ</th>
+                        @else
+                            <th style="width:20%">หัวข้อข่าว</th>
+                            <th style="width:20%">รูปข่าว</th>
+                            <th style="width:40%">เนื้อหา</th>
+                            <th style="width:10%;text-align: center">แก้ไข</th>
+                            <th style="width:10%;text-align: center">ลบ</th>
+                        @endif
                     </tr>
                     </tfoot>
                     <tbody>
@@ -64,13 +91,13 @@
                             <td>{{$new['title']}}</td>
                             <td style="text-align: center"> <img src="{{asset($images)}}" style="width:80%;height: 100px;max-width: 150px"></td>
                             <td >
-{{--                               !!! show content with normal text--}}
-{{--                                {{strip_tags($new['content'])}}--}}
-
-{{--                                show content with html tag--}}
                                  <?php echo $new['content']  ?>
-
+                            </td>
+                            @if(Auth::user()->group_id==1 )
+                                <td >
+                                    <?php echo $new->organize->name  ?>
                                 </td>
+                            @endif
                             <td  style="text-align: center">
                                 <form action="{{ action('NewsController@edit', ['id' => $new['id']])}}" >
                                     <button  type="submit" class="btn btn-primary">แก้ไข</button>
@@ -112,6 +139,10 @@
 
         }
 
+        if(url.searchParams.get("name") !=null){
+            document.getElementById("organize_name").value =  url.searchParams.get("name");
+
+        }
     </script>
 
 

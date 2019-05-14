@@ -28,3 +28,8 @@ Route::get('organize','OrganizeController@apiGetOrganizes');
 Route::get('newstype','NewsTypeController@apiGetNewsType');
 Route::get('news','NewsController@apiGetNews');
 Route::get('districts','DistrictController@apiGetDistricts');
+
+
+
+Route::get('follower/{end_user_id}','API\FollowerController@getFollowOrg');
+Route::get('follower/{end_user_id}/{organized_id}','API\FollowerController@followOrg');

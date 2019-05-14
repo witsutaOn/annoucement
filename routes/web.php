@@ -65,3 +65,6 @@ Route::resource('organize', 'OrganizeController');
 Route::resource('/newstype', 'NewsTypeController');
 
 
+Route::get('showfollow/{end_user_id}', 'API\FollowerController@showFollow');
+
+

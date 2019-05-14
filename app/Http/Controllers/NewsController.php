@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\District;
 use App\News;
 use App\News_type;
 use App\Organize;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -66,6 +68,18 @@ class NewsController extends Controller
         return response()->json(['status' => 'success', 'newsType' => $news]);
     }
 
+    public function apiGetNewsFromFollow($user_id) {
+
+        $news = News::join('follower', 'follower.organize_id', '=', 'news.organize_id')
+            ->where('follower.end_user_id', $user_id)
+            ->paginate(10);
+//            ->toSql();
+
+//        dd($news);
+
+        return response()->json(['status' => 'success', 'news' => $news]);
+    }
+
     public function filter($table,$model, $filterData)
     {
         foreach ($filterData as $key => $value) {
@@ -82,7 +96,8 @@ class NewsController extends Controller
 
     public function create(){
         $news_type = News_type::all();
-        return view('news.create')->with('news_type', $news_type);
+        $organizes = Organize::all();
+        return view('news.create')->with('news_type', $news_type)->with('organizes', $organizes);
     }
 
     public function store(Request $request){
@@ -108,7 +123,11 @@ class NewsController extends Controller
             $news->title = $request->title;
             $news->content = $request->input('content');
             $news->type_id = $request->type_id;
-            $news->organize_id = Auth::user()->organize_id;
+            if(Auth::user()->group_id == 1) {
+                $news->organize_id = $request->organize_id; //Superadmin can create news instead of organizes.
+            }else{
+                $news->organize_id = Auth::user()->organize_id;
+            }
             $news->user_id = Auth::user()->id;
             $news->images=json_encode($data);
             $news->published_at= $request->published_at;

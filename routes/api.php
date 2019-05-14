@@ -33,3 +33,8 @@ Route::get('districts','DistrictController@apiGetDistricts');
 
 Route::get('follower/{end_user_id}','API\FollowerController@getFollowOrg');
 Route::get('follower/{end_user_id}/{organized_id}','API\FollowerController@followOrg');
+
+
+Route::get('news/organization/{organized_id}','NewsController@getNewsByOrganizationId');
+
+Route::get('news/follow/{user_id}','NewsController@apiGetNewsFromFollow');

@@ -76,7 +76,7 @@
 
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อน่วยงาน') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อหน่วยงาน') }}</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select " name="organize_id" required>

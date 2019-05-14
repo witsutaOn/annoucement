@@ -17,10 +17,23 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('เพิ่มข่าว') }}</div>
-
                     <div class="card-body">
+
                         <form method="POST" action="{{ action('NewsController@store') }}"  enctype="multipart/form-data">
                             @csrf
+
+                            @if(Auth::user()->group_id == 1)
+                            <div class="form-group">
+                                <label for="name" >{{ __('หน่วยงาน') }}</label>
+                                <select class="custom-select " id="inlineFormCustomSelectPref" name="organize_id">
+                                    {{--                <option selected hidden>หน่วยงาน</option>--}}
+                                    @foreach($organizes as $row)
+                                        <option value="{{$row->id}}">{{$row->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
+
                             <div class="form-group ">
                                 <label for="name" >{{ __('หัวข้อข่าว') }}</label>
 {{--                                    <label for="inputHeadline">หัวข้อข่าว</label>--}}

@@ -23,7 +23,7 @@
         "vue": "^2.5.17"
     },
     "dependencies": {
-        "froala-editor": "^2.9.4",
+        "froala-editor": "^4.0.7",
         "startbootstrap-sb-admin": "^5.0.3"
     }
 }
